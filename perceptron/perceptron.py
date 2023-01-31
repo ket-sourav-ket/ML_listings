@@ -47,8 +47,8 @@ class Perceptron(object):
         self.errors_ = []                                               #a standard deviation sigma=0.01
         for epoch in range(self.n_iter):
             errors=0
-            for X_i,target in zip(X,Y):          #X_i denotes the i the example in the training dataset
-                update= self.l_rate * (target - self.predict(X_i))
+            for X_i,target in zip(X,Y):          #X_i denotes the i_th the example in the training dataset
+                update= self.l_rate * (target - self.predict(X_i))   #perceptron learning rule
                 self.w_[1:] += update * X_i
                 self.w_[0] += update
                 errors += int(update != 0.0)
