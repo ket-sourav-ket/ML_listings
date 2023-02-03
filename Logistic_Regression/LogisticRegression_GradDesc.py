@@ -6,7 +6,7 @@ using the sigmoid activation function instead of the identity activation
 function.
 
 The cost function is optimized using gradient descent(batch updates over the whole dataset)
-The cost function is the obtained by minimizing the negative log likelihood(since we wanat to
+The cost function is obtained by minimizing the negative log likelihood(since we want to
 maximize the likelihood function)
 
 """
@@ -65,5 +65,5 @@ class LogisticRegressionGD(object):
     def activation(self, z):                  #defines the sigmoid activation function
         return 1. / (1. + np.exp(-np.clip(z, -250, 250)))
 
-    def predict(self, X):                      #computes the predictino based on the unit step decision function
+    def predict(self, X):                      #computes the prediction based on the unit step decision function
         return np.where(self.net_input(X) >= 0.0, 1, 0)
