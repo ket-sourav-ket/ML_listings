@@ -1,3 +1,9 @@
+"""
+@uthor: sourav
+A convenience function to visualize the decision regions of a classifier model
+
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
