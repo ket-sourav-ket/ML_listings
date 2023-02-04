@@ -133,6 +133,10 @@ class NeuralNetMLP(object):
         Returns:
         ----------
         self
+
+        *Note*: ideally SGD(with mini batches) should be used for training and also a validation dataset should be used to keep 
+        track of the model performance after each epoch. I have not done any of that cause it's a lot of work :(
+        The model still performs pretty well nonetheless 
         """
         n_output = np.unique(y_train).shape[0]  # number of class labels
         n_features = X_train.shape[1]
