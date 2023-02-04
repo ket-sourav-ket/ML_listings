@@ -45,7 +45,7 @@ class NaiveBayesClassifier(object):
             for j in range(X.shape[0]):
                 tempClassCondProb*= self.likelihoodEs(j,X[j],self.classL_[i])
             
-            classCondProb=np.append(classCondProb,[tempClassCondProb])  #likelihood of the featue vector given the various class labels
+            classCondProb=np.append(classCondProb,[tempClassCondProb])  #likelihood of the feature vector given the various class labels
         
         
         posteriorProb=self.classProb_ * classCondProb
