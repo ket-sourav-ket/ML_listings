@@ -1,43 +1,26 @@
 import numpy as np
 
+class LinearRegressionGradDesc(object):
 
-"""
-@uthor: sourav
-Simple linear regression model based on iterative fitting through gradient descent
-
-"""
-
-
-class LinearRegressionGradDesc:
-    def __init__(self, eta=0.01, n_iter=50, seed=1):
-
-        """
-        eta: learning rate for the gradient descent optimizer
-        n_iter: maximum number for epochs
-        seed: radom seed to make fitting process reproducible
-
-        """
+    def __init__(self, eta=0.001, n_iter=20):
         self.eta = eta
         self.n_iter = n_iter
-        self.random_state = seed
 
-    def fit(self, X, y):                      # optimize cost function(SSE) via gradient descent
-        rgen = np.random.RandomState(self.random_state)
-        self.w_ = rgen.normal(loc=0.0, scale=0.01, size=X.shape[1])
-        self.b_ = np.array([0.])
-        self.losses_ = []
+    def fit(self, X, y):
+        self.w_ = np.zeros(1 + X.shape[1])
+        self.cost_ = []
 
-        for i in range(self.n_iter):          #loop that goes over the entire training dataset
+        for i in range(self.n_iter):
             output = self.net_input(X)
             errors = (y - output)
-            self.w_ += self.eta * 2.0 * X.T.dot(errors) / X.shape[0]
-            self.b_ += self.eta * 2.0 * errors.mean()
-            loss = (errors**2).mean()
-            self.losses_.append(loss)
+            self.w_[1:] += self.eta * X.T.dot(errors)
+            self.w_[0] += self.eta * errors.sum()
+            cost = (errors**2).sum() / 2.0
+            self.cost_.append(cost)
         return self
 
     def net_input(self, X):
-        return np.dot(X, self.w_) + self.b_
+        return np.dot(X, self.w_[1:]) + self.w_[0]
 
     def predict(self, X):
         return self.net_input(X)
