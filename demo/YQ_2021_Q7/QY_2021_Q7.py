@@ -10,7 +10,7 @@ Y[50:100]=1
 Y[100:150]=2
 X=df.iloc[0: , 0:4].values
 class_labels=['iris-setosa','iris-versicolor','iris-virginica']
-network = nn.NeuralNetMLP(n_hidden=60,l2=0.01,epochs=100,eta=0.005,shuffle=True,seed=1)
+network = nn.NeuralNetMLP(n_hidden=60,l2=0.01,epochs=100,eta=0.005,seed=1)
 network.fit(X[0:148],Y[0:148].T)
 prediction = network.predict(X[148:])
 
