@@ -4,8 +4,12 @@ import sys
 
 X=np.array([[1,2,3,4],[3,4,8,9],[1,3,5,4],[6,3,8,1]])
 
+
+
 #if library method is allowed do this:
 inv_x=np.linalg.inv(X)
+print(inv_x)
+print()
 
 
 #else if library method is not allowed do all of these:
@@ -26,8 +30,8 @@ def det(X):
 
     else:
         det_val=0
-        for col_i in range(X.shape[0]):
-            det_val = det_val + (-1**col_i)*X[0,col_i]*det(reshape(X,0,col_i))
+        for col_i in range(X.shape[1]):
+            det_val = det_val + (np.power(-1,col_i))*X[0,col_i]*det(reshape(X,0,col_i))
         return det_val
 
 def create_mask(shape_tuple):
@@ -57,6 +61,8 @@ def inverse(X):
         sys.exit()
 
 print(inverse(X))
+
+
 
 sum_x= X + inverse(X)
 pro_x= X * inverse(X)
