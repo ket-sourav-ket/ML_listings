@@ -61,9 +61,8 @@ def inverse(X):
         sys.exit()
 
 print(inverse(X))
+inv_x=inverse(X)
 
-
-
-sum_x= X + inverse(X)
-pro_x= X * inverse(X)
-dif_x = X - inverse(X)
+sum_x= X + inv_x
+pro_x= X * inv_x
+dif_x = X - inv_x

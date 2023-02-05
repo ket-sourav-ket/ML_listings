@@ -4,10 +4,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def lin_reg_plot(X,Y,model):
+    #standardizing the data before feeding to the model:
     X_stndrd=np.copy(X)
     X_stndrd[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
+
     prediction_std=model.predict(X_stndrd)
-    prediction_rescaled=prediction_std*Y[:, 0].std() + Y[:, 0].mean()
+    prediction_rescaled=prediction_std*Y[:, 0].std() + Y[:, 0].mean()    #converting back to original scale
     plt.scatter(X,Y,c='blue', edgecolor='white',s=70)
     plt.plot(X,prediction_rescaled,color='black',lw=2)
     return None
@@ -21,9 +23,11 @@ X= data[0:,0]
 Y= data[0:,1]
 Y=np.atleast_2d(Y).T
 X=np.atleast_2d(X).T
+
+#standardizing the data to have a standard Gaussian(normal) distribution (zero mean, unit variance)
 X_std = np.copy(X)
 Y_std = np.copy(Y)
-X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
+X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()   
 Y_std[:, 0] = (Y[:, 0] - Y[:, 0].mean()) / Y[:, 0].std()
 
 
@@ -42,7 +46,7 @@ plt.xlabel('years of experience')
 plt.ylabel('salary')
 plt.show(block=True)
 
-std_input= (5- X[:, 0].mean()) / X[:, 0].std()
+std_input= (5- X[:, 0].mean()) / X[:, 0].std()     #standardizing the input data
 std_ideal_salary=regrObj.predict(np.transpose(np.atleast_2d(np.array([std_input]))))
-ideal_salary=(std_ideal_salary*Y[:, 0].std()) + Y[:, 0].mean()
+ideal_salary=(std_ideal_salary*Y[:, 0].std()) + Y[:, 0].mean()    #converting to the original scale
 print(f"ideal salary is {ideal_salary}")
